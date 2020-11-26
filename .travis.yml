@@ -1,0 +1,22 @@
+language: generic
+
+cache:
+  # Caches $HOME/.npm when npm ci is default script command
+  # Caches node_modules in all other cases
+  npm: true
+  directories:
+    - ~/.cache
+
+services:
+  - docker
+
+before_script:
+  - docker-compose up -d --build
+  - docker-compose -f pre-commit.yml build
+
+script:
+  - docker-compose exec frontend npm run lint
+  - docker-compose -f pre-commit.yml up
+
+after_script:
+  - docker-compose down -v

@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  postgres:
+    image: postgres:12.1-alpine
+    container_name: IG-postgres
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=ig_db
+      - POSTGRES_USER=ig_user
+      - POSTGRES_PASSWORD=ig_pwd
+  frontend:
+    build: ./frontend
+    image: docker.pkg.github.com/ajithpmohan/image-gallery-app/frontend-dev:0.1
+    container_name: IG-frontend
+    volumes:
+      - ./frontend:/usr/src/app/frontend/
+      - /usr/src/app/frontend/node_modules
+    ports:
+      - "9001:9000"
+    depends_on:
+      - postgres
+      - backend
+    stdin_open: true
+  backend:
+    build: ./backend
+    image: docker.pkg.github.com/ajithpmohan/image-gallery-app/backend-dev:0.1
+    container_name: IG-backend
+    command: python manage.py runserver 0.0.0.0:9000
+    volumes:
+      - ./backend/:/usr/src/app/backend/
+    ports:
+      - "9002:9000"
+    env_file:
+      - ./backend/.env
+    depends_on:
+      - postgres
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres-data:

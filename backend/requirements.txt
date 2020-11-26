@@ -1,0 +1,19 @@
+# Core Packages
+Django==3.1.3
+djangorestframework==3.11.0
+django-cors-headers==3.4.0
+drf-yasg==1.17.1
+python-decouple==3.3
+
+# Coding standards
+pylint==2.6.0
+colorlog==4.2.1
+
+# Testing
+coverage==5.2.1
+pytest-django==3.10.0
+
+# Debuggers
+bpython==0.19
+django-debug-toolbar==2.2
+django-extensions==3.0.0

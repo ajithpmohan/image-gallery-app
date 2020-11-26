@@ -1,0 +1,32 @@
+default_language_version:
+  python: python3.8
+exclude: "[a-zA-Z]*/(migrations)/(.)*"
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.3.0
+    hooks:
+      - id: trailing-whitespace
+      - id: check-executables-have-shebangs
+      - id: debug-statements
+      - id: check-merge-conflict
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.6.2
+    hooks:
+      - id: bandit
+        args: ['-iii', '-ll']
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.4
+    hooks:
+      - id: flake8
+        args: [--config=backend/setup.cfg]
+  - repo: https://github.com/psf/black
+    rev: 20.8b1
+    hooks:
+      - id: black
+        args: [--config=backend/pyproject.toml]
+        # args: [--config=backend/pyproject.toml, --check, --diff,]
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.6.4
+    hooks:
+      - id: isort
+        name: Reorder python imports
