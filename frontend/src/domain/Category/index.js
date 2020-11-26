@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { toastrOptions } from 'constants/toastr';
+import { doUpdateCategories } from 'actions';
+import { TOASTR_OPTIONS } from 'constants/utils';
 
 const initialCategory = {
   name: '',
@@ -17,6 +19,7 @@ const CategoryPage = () => {
     Component for Creating Image Category.
   */
   const [category, setCategory] = useState(initialCategory);
+  const dispatch = useDispatch();
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_DOMAIN;
 
   const handleSubmit = (e) => {
@@ -29,16 +32,17 @@ const CategoryPage = () => {
         })
         .catch(({ response }) => response);
 
-      res?.status === 201
-        ? setCategory(initialCategory)
-        : setCategory({ ...category, errors: res.data });
-
-      res?.status === 201
-        ? toast.dark(
-            '🚀 Category Created Successfully',
-            toastrOptions,
-          )
-        : toast.error('💩 Oops! Error Occured.', toastrOptions);
+      if (res?.status === 201) {
+        setCategory(initialCategory);
+        dispatch(doUpdateCategories(res.data));
+        toast.dark(
+          '🚀 Category Created Successfully',
+          TOASTR_OPTIONS,
+        );
+      } else {
+        setCategory({ ...category, errors: res.data });
+        toast.error('💩 Oops! Error Occured.', TOASTR_OPTIONS);
+      }
     })();
   };
 

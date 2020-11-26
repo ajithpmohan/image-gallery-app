@@ -19,13 +19,3 @@ export const doUpdateImages = (payload) => ({
   type: actionTypes.UPDATE_IMAGES,
   payload,
 });
-
-export const doFetchCategories = (query) => ({
-  type: actionTypes.CATEGORY_FETCH,
-  query,
-});
-
-export const doFetchImages = (query) => ({
-  type: actionTypes.IMAGE_FETCH,
-  query,
-});

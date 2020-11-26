@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 
-import { doSetCategories, doUpdateImages } from 'actions';
-import { toastrOptions } from 'constants/toastr';
+import { doUpdateImages } from 'actions';
+import { TOASTR_OPTIONS, IMG_SUPPORTED_EXT } from 'constants/utils';
 import { CategorySelect } from 'components/Category';
 import { getCategories } from 'selectors';
 
@@ -24,15 +24,6 @@ const UploadPage = () => {
 
   const [state, setState] = useState(initialState);
   const SERVER_BASE_URL = process.env.REACT_APP_SERVER_DOMAIN;
-
-  useEffect(() => {
-    (async () => {
-      const res = await axios.get(
-        `${SERVER_BASE_URL}image-category/`,
-      );
-      dispatch(doSetCategories(res.data));
-    })();
-  }, [SERVER_BASE_URL]);
 
   const onDrop = (files) => {
     if (files.length) {
@@ -53,11 +44,11 @@ const UploadPage = () => {
         res?.status == 201
           ? toast.dark(
               '🚀 Image Uploaded! Go to Gallery to view the image',
-              toastrOptions,
+              TOASTR_OPTIONS,
             )
           : toast.error(
               '💩 Oops something goes wrong. Uploading failed. Try again!',
-              toastrOptions,
+              TOASTR_OPTIONS,
             );
       })();
     }
@@ -81,7 +72,7 @@ const UploadPage = () => {
         withIcon={true}
         buttonText="Choose image"
         onChange={onDrop}
-        imgExtension={['.jpg', '.jpeg', '.gif', '.png', '.gif']}
+        imgExtension={IMG_SUPPORTED_EXT}
         maxFileSize={5242880}
         singleImage={true}
       />

@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from 'domain/App';
-import ReduxStoreProvider from 'store';
-import reportWebVitals from './reportWebVitals';
+import reportWebVitals from 'reportWebVitals';
+import StoreCtxProvider from 'store';
+import ServerCtxProvider from 'services/server';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,9 +13,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ReduxStoreProvider>
-      <App />
-    </ReduxStoreProvider>
+    <StoreCtxProvider>
+      <ServerCtxProvider>
+        <App />
+      </ServerCtxProvider>
+    </StoreCtxProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

@@ -1,17 +1,17 @@
 import React from 'react';
-import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Provider } from 'react-redux';
 import { store } from 'store';
 
-const ReduxStoreProvider = ({ children }) => (
+const StoreCtxProvider = ({ children }) => (
   <Provider store={store}>{children}</Provider>
 );
 
-ReduxStoreProvider.propTypes = {
+StoreCtxProvider.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export default ReduxStoreProvider;
+export default StoreCtxProvider;

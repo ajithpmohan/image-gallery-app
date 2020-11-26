@@ -1,7 +1,4 @@
-export const SET_IMAGES = 'SET_IMAGES';
-export const UPDATE_IMAGES = 'UPDATE_IMAGES';
 export const SET_CATEGORIES = 'SET_CATEGORIES';
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
-
-export const CATEGORY_FETCH = 'CATEGORY_FETCH';
-export const IMAGE_FETCH = 'IMAGE_FETCH';
+export const SET_IMAGES = 'SET_IMAGES';
+export const UPDATE_IMAGES = 'UPDATE_IMAGES';

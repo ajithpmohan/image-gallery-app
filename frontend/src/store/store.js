@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
 import { createLogger } from 'redux-logger';
 import {
   createStateSyncMiddleware,
@@ -7,12 +6,11 @@ import {
 } from 'redux-state-sync';
 
 import rootReducer from 'reducers';
-import rootSaga from 'sagas';
 
-const saga = createSagaMiddleware();
-
+/* Redux Logger */
 const logger = createLogger();
 
+/* Redux State Sync - Useful for crosstab state sync */
 const stateSyncConfig = {};
 const stateSyncMiddlewares = [
   createStateSyncMiddleware(stateSyncConfig),
@@ -21,10 +19,8 @@ const stateSyncMiddlewares = [
 const store = createStore(
   rootReducer,
   undefined,
-  applyMiddleware(...stateSyncMiddlewares, logger, saga),
+  applyMiddleware(...stateSyncMiddlewares, logger),
 );
-
-saga.run(rootSaga);
 
 initMessageListener(store);
 

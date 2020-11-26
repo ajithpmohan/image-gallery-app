@@ -1,5 +1,5 @@
 import store from './store';
-import ReduxStoreProvider from './provider';
+import StoreCtxProvider from './provider';
 
-export default ReduxStoreProvider;
+export default StoreCtxProvider;
 export { store };
