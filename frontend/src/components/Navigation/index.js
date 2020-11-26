@@ -11,6 +11,9 @@ const Navigation = () => (
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mr-auto">
+        <Nav.Link as={Link} to={ROUTES.CATEGORY}>
+          Category
+        </Nav.Link>
         <Nav.Link as={Link} to={ROUTES.UPLOAD}>
           Upload
         </Nav.Link>

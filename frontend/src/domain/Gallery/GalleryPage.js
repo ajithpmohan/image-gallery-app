@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 
 // import { doFetchCategories, doFetchImages } from 'actions';
 import { CategorySelect } from 'components/Category';
@@ -35,7 +36,7 @@ const GalleryPage = () => {
   };
 
   return (
-    <>
+    <Container>
       <CategorySelect
         categories={categories}
         label="Filter by Category &nbsp;"
@@ -43,7 +44,7 @@ const GalleryPage = () => {
       />
       <hr />
       <GalleryList images={images} filter={filter} />
-    </>
+    </Container>
   );
 };
 

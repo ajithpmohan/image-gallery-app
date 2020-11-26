@@ -21,7 +21,7 @@ const GalleryList = ({ images = [], filter }) => {
     <Card body>
       Gallery is empty.
       <Nav.Link as={Link} to={ROUTES.UPLOAD}>
-        Upload some images
+        Upload Images
       </Nav.Link>
     </Card>
   );

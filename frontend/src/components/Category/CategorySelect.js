@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/FormControl';
+import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
+import * as ROUTES from 'constants/routes';
 
 const CategorySelect = ({ categories = [], label, handleChange }) => {
   return !!categories.length ? (
@@ -20,7 +24,12 @@ const CategorySelect = ({ categories = [], label, handleChange }) => {
       </Form>
     </>
   ) : (
-    <Card body>No Category found. Create Some Category.</Card>
+    <Card body>
+      No Category found.
+      <Nav.Link as={Link} to={ROUTES.CATEGORY}>
+        Create Some Category
+      </Nav.Link>
+    </Card>
   );
 };
 

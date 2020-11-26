@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
+import Container from 'react-bootstrap/Container';
 import ImageUploader from 'react-images-upload';
 import { ToastContainer, toast } from 'react-toastify';
 
@@ -16,7 +17,7 @@ const initialState = {
 
 const UploadPage = () => {
   /*
-    Component for uploading images.
+    Component for Uploading Images.
   */
   const categories = useSelector((state) => getCategories(state));
   const dispatch = useDispatch();
@@ -46,21 +47,18 @@ const UploadPage = () => {
           .post(`${SERVER_BASE_URL}image-gallery/`, data)
           .catch((err) => err.response);
 
-        if (res.status == 201) {
-          // status 201 - item created successfully
-          dispatch(doUpdateImages(res.data));
+        // Status 201 means item created successfully
+        res?.status === 201 && dispatch(doUpdateImages(res.data));
 
-          toast.dark(
-            '🚀 Image Uploaded! Go to Gallery to view the image',
-            toastrOptions,
-          );
-        } else {
-          // failed to upload image
-          toast.error(
-            '💩 Oops something goes wrong. Uploading failed. Try again!',
-            toastrOptions,
-          );
-        }
+        res?.status == 201
+          ? toast.dark(
+              '🚀 Image Uploaded! Go to Gallery to view the image',
+              toastrOptions,
+            )
+          : toast.error(
+              '💩 Oops something goes wrong. Uploading failed. Try again!',
+              toastrOptions,
+            );
       })();
     }
   };
@@ -70,7 +68,7 @@ const UploadPage = () => {
   };
 
   return (
-    <>
+    <Container>
       <ToastContainer />
 
       <CategorySelect
@@ -87,7 +85,7 @@ const UploadPage = () => {
         maxFileSize={5242880}
         singleImage={true}
       />
-    </>
+    </Container>
   );
 };
 

@@ -1,4 +1,4 @@
-import GalleryPage from './Gallery';
+import GalleryPage from './GalleryPage';
 import GalleryItem from './GalleryItem';
 import GalleryList from './GalleryList';
 
