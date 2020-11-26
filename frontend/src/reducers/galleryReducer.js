@@ -34,7 +34,7 @@ const GalleryReducer = (state = initialState, action) => {
     case actionTypes.SET_IMAGES:
       return setImages(state, action.payload);
     case actionTypes.UPDATE_IMAGES:
-      return updateImages((state, action.payload));
+      return updateImages(state, action.payload);
     default:
       return state;
   }

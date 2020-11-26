@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import axios from 'axios';
 
-import { useSelector, useDispatch } from 'react-redux';
 // import { doFetchCategories, doFetchImages } from 'actions';
+import { CategorySelect } from 'components/Category';
 import { doSetCategories, doSetImages } from 'actions';
 import { getImages, getCategories } from 'selectors';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
 import GalleryList from './GalleryList';
-import Card from 'react-bootstrap/Card';
 
 const GalleryPage = () => {
   const categories = useSelector((state) => getCategories(state));
@@ -35,30 +33,16 @@ const GalleryPage = () => {
   const handleChange = (e) => {
     setFilter(parseInt(e.target.value || 0));
   };
+
   return (
     <>
-      {!!categories.length && (
-        <>
-          <Form inline>
-            Filter by Category &nbsp;
-            <FormControl as="select" onChange={handleChange}>
-              <option value="">---</option>
-              {categories.map((category) => (
-                <option value={category.id} key={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </FormControl>
-          </Form>
-          <hr />
-        </>
-      )}
-
-      {images.length ? (
-        <GalleryList images={images} filter={filter} />
-      ) : (
-        <Card body>Gallery is empty.</Card>
-      )}
+      <CategorySelect
+        categories={categories}
+        label="Filter by Category &nbsp;"
+        handleChange={handleChange}
+      />
+      <hr />
+      <GalleryList images={images} filter={filter} />
     </>
   );
 };

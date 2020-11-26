@@ -7,6 +7,8 @@ import reportWebVitals from './reportWebVitals';
 
 // Importing the Bootstrap CSS
 import 'bootstrap/dist/css/bootstrap.min.css';
+// Importing the React Toastr CSS
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.render(
   <React.StrictMode>
