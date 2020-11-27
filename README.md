@@ -9,8 +9,9 @@
 * React.js & Redux
 * React Bootstrap
 * PostgreSQL
-* Swagger
-* Pytest
+* Swagger UI
+* Pytest for django testing
+* Code Coverage Integration
 * Travis for CI
 
 ## System Requirements
@@ -27,7 +28,7 @@ Download the repository:
 
 Before building the services update the permission of following bash scripts.
 
-    chmod +x backend/entrypoint.sh
+    chmod +x backend/coverage.sh backend/entrypoint.sh
 
 ## Build the Services
 
@@ -53,5 +54,6 @@ Open [http://localhost:9002/](http://localhost:9002/) to access `backend` servic
 
     docker-compose -f pre-commit.yml up --build
 
-## Run Pytest
-    docker-compose exec backend pytest
+## Run Pytest & Coverage Report
+
+    docker-compose exec backend ./coverage.sh
