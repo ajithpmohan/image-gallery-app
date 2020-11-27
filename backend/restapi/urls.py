@@ -9,11 +9,11 @@ urlpatterns = [
     path(
         "image-category/",
         views.ImageCategoryAPIView.as_view(),
-        name="driver_register",
+        name="image_category",
     ),
     path(
         "image-gallery/",
         views.ImageGalleryAPIView.as_view(),
-        name="driver_location",
+        name="image_gallery",
     ),
 ]

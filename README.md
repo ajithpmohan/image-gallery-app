@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/ajithpmohan/image-gallery-app.svg?branch=main)](https://travis-ci.com/ajithpmohan/image-gallery-app)
 
-## Tech Stack
+## Tech Stack & Tools
 
 * Docker
 * Django Rest Framework
@@ -10,6 +10,8 @@
 * React Bootstrap
 * PostgreSQL
 * Swagger
+* Pytest
+* Travis for CI
 
 ## System Requirements
 
@@ -50,3 +52,6 @@ Open [http://localhost:9002/](http://localhost:9002/) to access `backend` servic
 ## Run Python Code Linter & Formatter
 
     docker-compose -f pre-commit.yml up --build
+
+## Run Pytest
+    docker-compose exec backend pytest

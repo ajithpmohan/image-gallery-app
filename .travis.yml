@@ -15,6 +15,7 @@ before_script:
   - docker-compose -f pre-commit.yml build
 
 script:
+  - docker-compose exec backend pytest
   - docker-compose exec frontend npm run lint
   - docker-compose -f pre-commit.yml up
 
