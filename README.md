@@ -1,6 +1,6 @@
 # Image Gallery App
 
-[![Build Status](https://travis-ci.com/ajithpmohan/image-gallery-app.svg?branch=main)](https://travis-ci.com/ajithpmohan/image-gallery-app)
+[![Build Status](https://travis-ci.com/ajithpmohan/image-gallery-app.svg?branch=main)](https://travis-ci.com/ajithpmohan/image-gallery-app) [![codecov](https://codecov.io/gh/ajithpmohan/image-gallery-app/branch/main/graph/badge.svg?token=X3F3LX9JH0)](https://codecov.io/gh/ajithpmohan/image-gallery-app)
 
 ## Tech Stack & Tools
 

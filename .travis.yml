@@ -20,4 +20,5 @@ script:
   - docker-compose exec frontend npm run lint
 
 after_script:
+  - bash <(curl -s https://codecov.io/bash) -f backend/coverage.xml
   - docker-compose down -v
