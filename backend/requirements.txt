@@ -6,6 +6,7 @@ drf-yasg==1.17.1
 python-decouple==3.3
 
 # Coding standards
+flake8==3.8.4
 pylint==2.6.0
 colorlog==4.2.1
 
