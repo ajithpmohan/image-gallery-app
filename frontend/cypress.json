@@ -1,0 +1,7 @@
+{
+  "video": false,
+  "baseUrl": "http://localhost:9001",
+  "env": {
+    "serverUrl": "http://localhost:9002/api/v1"
+  }
+}
