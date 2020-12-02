@@ -71,6 +71,7 @@ const UploadPage = () => {
       <ImageUploader
         withIcon={true}
         buttonText="Choose image"
+        name="imageInput"
         onChange={onDrop}
         imgExtension={IMG_SUPPORTED_EXT}
         maxFileSize={5242880}
