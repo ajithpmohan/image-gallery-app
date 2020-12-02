@@ -23,7 +23,7 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "PORT=9000 react-scripts start",
+    "start": "PORT=9000 react-scripts -r @cypress/instrument-cra start",
     "lint": "eslint src/ --fix",
     "format": "prettier --config .prettierrc './src/**/*.js' --write",
     "build": "react-scripts build",
@@ -49,12 +49,19 @@
     ]
   },
   "devDependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.14.0",
     "eslint-config-google": "^0.14.0",
     "eslint-config-prettier": "^6.15.0",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.21.5",
+    "nyc": "^15.1.0",
     "prettier": "^2.2.0"
+  },
+  "nyc": {
+    "exclude": [
+      "src/reportWebVitals.js"
+    ]
   }
 }

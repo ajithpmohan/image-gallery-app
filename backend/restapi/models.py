@@ -25,7 +25,6 @@ class ImageCategory(models.Model):
 
 class ImageGallery(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    created = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(
         'restapi.ImageCategory',
         null=True,
@@ -34,6 +33,7 @@ class ImageGallery(models.Model):
         related_name='%(class)s',
         help_text=_('Image Category is not a mandatory field.'),
     )
+    created = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(_('Image'), upload_to=utils.default_image_path)
 
     class Meta:
