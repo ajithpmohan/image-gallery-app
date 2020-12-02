@@ -1,5 +1,3 @@
-// / <reference types="cypress" />
-
 const serverUrl = Cypress.env('serverUrl');
 
 const submitCategoryForm = (value) => {
@@ -18,19 +16,19 @@ const submitCategoryForm = (value) => {
 
 describe('Category', () => {
   it('create category', () => {
-    submitCategoryForm('Machine Learning');
-    cy.get('div.list-group').contains('Machine Learning');
+    submitCategoryForm('ML');
+    cy.get('div.list-group').contains('ML');
   });
 
   it('unique value error', () => {
-    submitCategoryForm('Machine Learning');
+    submitCategoryForm('ML');
     cy.get('div.form-group').contains(
       'Image Category with this name already exists.',
     );
   });
 
   it('case insensitive unique value error', () => {
-    submitCategoryForm('machine learning');
+    submitCategoryForm('ml');
 
     cy.get('div.form-group').contains(
       'Image Category with this name already exists.',

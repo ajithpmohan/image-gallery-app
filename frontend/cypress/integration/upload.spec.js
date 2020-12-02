@@ -1,5 +1,3 @@
-// / <reference types="cypress" />
-
 const serverUrl = Cypress.env('serverUrl');
 
 const imageUploadForm = (imageFile, category = null) => {
@@ -17,8 +15,8 @@ const imageUploadForm = (imageFile, category = null) => {
 describe('Image Upload', () => {
   it('upload image with category', () => {
     imageUploadForm(
-      'images/machine-learning.jpeg',
-      'Machine Learning',
+      'images/ml.jpeg',
+      'ML',
     );
     cy.get('div.Toastify').contains(
       '🚀 Image Uploaded! Go to Gallery to view the image',
@@ -26,7 +24,7 @@ describe('Image Upload', () => {
   });
 
   it('upload image without category', () => {
-    imageUploadForm('images/artificial-intelligence.png');
+    imageUploadForm('images/ai.png');
     cy.get('div.Toastify').contains(
       '🚀 Image Uploaded! Go to Gallery to view the image',
     );

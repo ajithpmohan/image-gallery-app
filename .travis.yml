@@ -13,12 +13,15 @@ services:
 before_script:
   - docker-compose up -d --build
   - docker-compose -f pre-commit.yml build
+  - docker-compose -f cy-run.yml build
 
 script:
   - docker-compose -f pre-commit.yml up
   - docker-compose exec backend ./coverage.sh
   - docker-compose exec frontend npm run lint
+  - docker-compose -f cy-run.yml run e2e
 
 after_script:
   - bash <(curl -s https://codecov.io/bash) -f backend/coverage.xml
+  - bash <(curl -s https://codecov.io/bash) -f frontend/coverage/coverage-final.json
   - docker-compose down -v

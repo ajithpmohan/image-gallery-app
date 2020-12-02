@@ -27,4 +27,4 @@ services:
     volumes:
       - ./frontend/cypress:/usr/src/app/e2e/cypress
       - ./frontend/cypress.json:/usr/src/app/e2e/cypress.json
-      # - ./frontend/coverage:/usr/src/app/e2e/coverage
+      - ./frontend/coverage:/usr/src/app/e2e/coverage

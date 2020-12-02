@@ -7,12 +7,9 @@ ENV APP_DIR=$BASE_DIR/e2e
 RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 
-# install dependencies
-# RUN apt-get install -y --no-install-recommends libgbm-dev
-
 # install cypress - e2e testing tool
 RUN npm install cypress
-# RUN npm install @cypress/code-coverage
+RUN npm install @cypress/code-coverage
 RUN npm install cypress-file-upload
 
 # copy cypress files and folders
