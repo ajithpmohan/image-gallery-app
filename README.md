@@ -7,10 +7,11 @@
 * Docker
 * Django Rest Framework
 * React.js & Redux
+* E2E Testing via cypress.io
 * React Bootstrap
 * PostgreSQL
 * Swagger UI
-* Pytest for django testing
+* Pytest
 * Code Coverage Integration
 * Travis for CI
 
@@ -53,6 +54,10 @@ Open [http://localhost:9002/](http://localhost:9002/) to access `backend` servic
 ## Run Python Code Linter & Formatter
 
     docker-compose -f pre-commit.yml up --build
+
+## Run React.js E2E Testing using Cypress
+
+    docker-compose -f cy-run.yml up --build
 
 ## Run Pytest & Coverage Report
 
