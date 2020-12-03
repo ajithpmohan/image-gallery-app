@@ -1,0 +1,30 @@
+FROM node:latest
+
+RUN apt-get update && apt-get install -y libgtk2.0-0 libnotify-dev libgconf-2-4 libnss3 \
+  libxss1 libasound2 xvfb zip
+
+RUN echo "install last google-chrome-stable"
+RUN \
+  wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - && \
+  echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list && \
+  apt-get update && \
+  apt-get install -y dbus-x11 google-chrome-stable && \
+  rm -rf /var/lib/apt/lists/*
+
+# set working directory
+ENV BASE_DIR=/usr/src/app/frontend
+RUN mkdir -p $BASE_DIR
+WORKDIR $BASE_DIR
+
+RUN npm install cypress
+RUN npm install @cypress/code-coverage
+RUN npm install cypress-file-upload
+
+COPY src $BASE_DIR/src
+COPY cypress $BASE_DIR/cypress
+COPY cypress.json $BASE_DIR/cypress.json
+
+# verify that Cypress has been installed correctly.
+# running this command separately from "cypress run" will also cache its result
+# to avoid verifying again when running the tests
+RUN npx cypress verify
