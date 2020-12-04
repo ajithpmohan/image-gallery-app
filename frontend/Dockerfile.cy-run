@@ -1,4 +1,3 @@
-# base image
 FROM cypress/base:12
 
 # set working directory
@@ -7,9 +6,9 @@ RUN mkdir -p $BASE_DIR
 WORKDIR $BASE_DIR
 
 # install cypress - e2e testing tool
-RUN npm install cypress
-RUN npm install @cypress/code-coverage
-RUN npm install cypress-file-upload
+RUN npm install cypress@latest
+RUN npm install @cypress/code-coverage@latest
+RUN npm install cypress-file-upload@latest
 
 COPY src $BASE_DIR/src
 COPY cypress $BASE_DIR/cypress
