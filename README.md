@@ -57,9 +57,9 @@ Open [http://localhost:9002/](http://localhost:9002/) to access `backend` servic
 
 ## Build & Run React.js E2E Testing using Cypress
 
-    docker-compose -f docker-compose-e2e.yml build cy-open
+    docker-compose -f docker-compose-e2e.yml build cy-run
 
-    docker-compose -f docker-compose-e2e.yml run cy-open
+    docker-compose -f docker-compose-e2e.yml run cy-run
 
 ## Run Pytest & Coverage Report
 

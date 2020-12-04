@@ -19,13 +19,13 @@ const ServerCtxProvider = ({ children }) => {
         .get(`${SERVER_BASE_URL}image-category/`)
         .catch(({ response }) => response);
 
-      res.status === 200 && dispatch(doSetCategories(res.data));
+      res?.status === 200 && dispatch(doSetCategories(res.data));
 
       res = await axios
         .get(`${SERVER_BASE_URL}image-gallery/`)
         .catch(({ response }) => response);
 
-      res.status === 200 && dispatch(doSetImages(res.data));
+      res?.status === 200 && dispatch(doSetImages(res.data));
     })();
   }, []);
 
