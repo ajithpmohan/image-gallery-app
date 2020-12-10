@@ -1,7 +1,7 @@
 FROM cypress/browsers:node14.15.0-chrome86-ff82
 
 # set working directory
-ENV BASE_DIR=/usr/src/app/frontend
+ENV BASE_DIR=/usr/src/app
 RUN mkdir -p $BASE_DIR
 WORKDIR $BASE_DIR
 

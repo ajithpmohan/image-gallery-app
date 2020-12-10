@@ -15,8 +15,8 @@ services:
     image: docker.pkg.github.com/ajithpmohan/image-gallery-app/frontend-dev:0.1
     container_name: IG-frontend
     volumes:
-      - ./frontend:/usr/src/app/frontend/
-      - /usr/src/app/frontend/node_modules
+      - ./frontend:/usr/src/app/
+      - /usr/src/app/node_modules
     ports:
       - "9001:9000"
     depends_on:

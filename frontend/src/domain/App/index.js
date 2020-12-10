@@ -5,9 +5,9 @@ import {
   Route,
 } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
-import * as ROUTES from 'constants/routes';
 
 import Navigation from 'components/Navigation';
+import * as ROUTES from 'constants/routes';
 import HomePage from 'domain/Home';
 import CategoryPage from 'domain/Category';
 import GalleryPage from 'domain/Gallery';

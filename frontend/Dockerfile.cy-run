@@ -1,7 +1,7 @@
 FROM cypress/base:12
 
 # set working directory
-ENV BASE_DIR=/usr/src/app/frontend
+ENV BASE_DIR=/usr/src/app
 RUN mkdir -p $BASE_DIR
 WORKDIR $BASE_DIR
 

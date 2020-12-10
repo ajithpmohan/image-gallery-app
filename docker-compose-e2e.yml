@@ -27,9 +27,9 @@ services:
     #     machine immediately takes effect within the e2e-testing-cy-open container (no docker
     #     rebuild required).
     volumes:
-      - ./frontend/cypress:/usr/src/app/frontend/cypress
-      - ./frontend/cypress.json:/usr/src/app/frontend/cypress.json
-      - ./frontend/coverage:/usr/src/app/frontend/coverage
+      - ./frontend/cypress:/usr/src/app/cypress
+      - ./frontend/cypress.json:/usr/src/app/cypress.json
+      - ./frontend/coverage:/usr/src/app/coverage
       - /tmp/.X11-unix:/tmp/.X11-unix
   cy-run:
     build:
@@ -55,6 +55,6 @@ services:
     #     machine immediately takes effect within the e2e-testing-cy-run container (no docker
     #     rebuild required).
     volumes:
-      - ./frontend/cypress:/usr/src/app/frontend/cypress
-      - ./frontend/cypress.json:/usr/src/app/frontend/cypress.json
-      - ./frontend/coverage:/usr/src/app/frontend/coverage
+      - ./frontend/cypress:/usr/src/app/cypress
+      - ./frontend/cypress.json:/usr/src/app/cypress.json
+      - ./frontend/coverage:/usr/src/app/coverage

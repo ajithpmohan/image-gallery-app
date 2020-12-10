@@ -9,35 +9,28 @@ module.exports = {
       },
     },
   },
-  'env': {
-    'browser': true,
-    'es6': true,
-    'node': true,
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
   },
-  'extends': [
-    'plugin:react/recommended',
-    'google',
-    'prettier',
-  ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly',
+  extends: ['plugin:react/recommended', 'google', 'prettier'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
   parser: 'babel-eslint',
-  'parserOptions': {
-    'ecmaFeatures': {
-      'jsx': true,
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
     },
-    'ecmaVersion': 2018,
-    'sourceType': 'module',
+    ecmaVersion: 2018,
+    sourceType: 'module',
   },
-  'plugins': [
-    'react',
-    'prettier',
-  ],
-  'rules': {
-    "prettier/prettier": ["error"],
-    "require-jsdoc": 0,
-    "react/react-in-jsx-scope": 0,
+  plugins: ['react', 'prettier'],
+  rules: {
+    'prettier/prettier': ['error'],
+    'require-jsdoc': 0,
+    'react/react-in-jsx-scope': 0,
   },
 };
