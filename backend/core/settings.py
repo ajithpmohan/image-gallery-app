@@ -128,7 +128,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-ASSETS_DIR = Path(BASE_DIR) / 'assets'
+ASSETS_DIR = Path(BASE_DIR).parent / 'assets'
 
 STATIC_URL = '/static/'
 
@@ -160,7 +160,7 @@ DEBUG_TOOLBAR_CONFIG = {
     'SHOW_TOOLBAR_CALLBACK': lambda request: False,
 }
 
-SHELL_PLUS = "bpython"
+SHELL_PLUS = "ipython"
 
 LOGGING = {
     'version': 1,

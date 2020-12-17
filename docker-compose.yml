@@ -33,7 +33,7 @@ services:
     ports:
       - "9002:9000"
     env_file:
-      - ./backend/.env
+      - ./backend/.env.dev
     depends_on:
       - postgres
     stdin_open: true
