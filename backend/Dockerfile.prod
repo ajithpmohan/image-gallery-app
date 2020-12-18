@@ -1,6 +1,9 @@
-# The first instruction is what image we want to base our container on
-# We Use an official Python runtime as a parent image
-FROM python:3.8.2-alpine
+###########
+# BUILDER #
+###########
+
+# pull official base image
+FROM python:3.8.2-alpine as builder
 
 # Set enviroment variables - Prevents Python from writing pyc files to disc
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -8,21 +11,26 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Prevents Python from buffering stdout and stderr
 ENV PYTHONUNBUFFERED 1
 
-# install dependencies
+# Set the working directory
+WORKDIR /usr/src/app
+
+# upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
 
-# install git dependencies
-RUN apk add --update git
+# install psycopg2 & pillow dependencies
+RUN apk update \
+    && apk add gcc python3-dev musl-dev postgresql-dev \
+    && apk add jpeg-dev zlib-dev libjpeg
 
-# install psycopg2, pillow & cryptography
-RUN apk add --virtual build-deps gcc python3-dev musl-dev \
-    && apk add postgresql-dev postgresql-client \
-    && pip install --no-cache-dir psycopg2 \
-    && apk add jpeg-dev zlib-dev libjpeg \
-    && pip install --no-cache-dir Pillow \
-    && apk add libffi-dev openssl-dev \
-    && pip install --no-cache-dir greenlet twisted hiredis cryptography \
-    && apk del build-deps
+COPY ./requirements.txt .
+RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
+
+#########
+# FINAL #
+#########
+
+# pull official base image
+FROM python:3.8.2-alpine
 
 # Set the working directory
 ENV BASE_DIR=/usr/src/app
@@ -36,11 +44,22 @@ RUN mkdir -p $ASSETS_DIR
 RUN mkdir $ASSETS_DIR/staticfiles
 RUN mkdir $ASSETS_DIR/mediafiles
 
+# upgrade pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# install psycopg2 & pillow dependencies
+RUN apk update \
+    && apk add libpq jpeg-dev zlib-dev libjpeg postgresql-client
+
+COPY --from=builder /usr/src/app/wheels /wheels
+COPY --from=builder /usr/src/app/requirements.txt .
+RUN pip install --no-cache /wheels/*
+
+# after installation, remove wheels
+RUN rm -rf /wheels
+
 # Copies everything over to Docker environment
 COPY . .
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
 
 # run entrypoint.sh
 ENTRYPOINT ["/usr/src/app/backend/entrypoint.prod.sh"]
