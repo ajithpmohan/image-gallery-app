@@ -19,6 +19,11 @@ services:
     depends_on:
       - db
       - backend
+    env_file:
+      # Before running the production yml file you need to create `.env.production` file
+      # inside frontend directory, which is excluded from git repository.
+      # Check ./frontend/.env.development for reference. Otherwise app won't work properly.
+      - ./frontend/.env.production
   backend:
     build:
       context: ./backend
@@ -31,6 +36,9 @@ services:
     expose:
       - 8000
     env_file:
+      # Before running the production yml file you need to create `.env.prod` file
+      # inside backend directory, which is excluded from git repository.
+      # Check ./backend/.env.dev for reference. Otherwise app won't work properly.
       - ./backend/.env.prod
     depends_on:
       - db
