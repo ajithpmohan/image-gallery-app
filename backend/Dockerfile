@@ -11,9 +11,6 @@ ENV PYTHONUNBUFFERED 1
 # install dependencies
 RUN pip install --no-cache-dir --upgrade pip
 
-# install git dependencies
-RUN apk add --update git
-
 # install psycopg2, pillow, black & cryptography
 RUN apk add --virtual build-deps gcc python3-dev musl-dev \
     && apk add postgresql-dev postgresql-client \
