@@ -124,6 +124,16 @@ USE_L10N = True
 
 USE_TZ = True
 
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', False)
+
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', False)
+
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', False)
+
+USE_X_FORWARDED_HOST = config('USE_X_FORWARDED_HOST', False)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
@@ -143,7 +153,6 @@ CORS_ORIGIN_WHITELIST = config('CORS_ORIGIN_WHITELIST', cast=Csv())
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer',
     ],
     'NON_FIELD_ERRORS_KEY': 'nonfield',
 }

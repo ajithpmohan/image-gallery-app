@@ -1,14 +1,6 @@
 version: '3.7'
 
 services:
-  db:
-    image: postgres:12.1-alpine
-    volumes:
-      - postgres-data:/var/lib/postgresql/data/
-    environment:
-      - POSTGRES_DB=ig_db
-      - POSTGRES_USER=ig_user
-      - POSTGRES_PASSWORD=ig_pwd
   frontend:
     build:
       context: ./frontend
@@ -17,12 +9,11 @@ services:
     ports:
       - 1338:80
     depends_on:
-      - db
       - backend
     env_file:
-      # Before running the production yml file you need to create `.env.production` file
-      # inside frontend directory, which is excluded from git repository.
-      # Check ./frontend/.env.development for reference. Otherwise app won't work properly.
+      # Before running the production yml file you need to copy
+      # `frontend/.env.production.example` file to .env.production
+      # and make appropriate changes.
       - ./frontend/.env.production
   backend:
     build:
@@ -36,23 +27,43 @@ services:
     expose:
       - 8000
     env_file:
-      # Before running the production yml file you need to create `.env.prod` file
-      # inside backend directory, which is excluded from git repository.
-      # Check ./backend/.env.dev for reference. Otherwise app won't work properly.
+      # Before running the production yml file you need to copy
+      # `backend/.env.prod.example` file to .env.prod and make
+      # appropriate changes.
       - ./backend/.env.prod
-    depends_on:
-      - db
-  nginx:
-    build: ./nginx
-    image: docker.pkg.github.com/ajithpmohan/image-gallery-app/nginx-prod:1.0
+  nginx-proxy:
+    build: nginx
+    image: docker.pkg.github.com/ajithpmohan/image-gallery-app/nginx-proxy:latest
+    restart: always
+    ports:
+      - 443:443
+      - 80:80
     volumes:
       - static_volume:/usr/src/app/assets/staticfiles
       - media_volume:/usr/src/app/assets/mediafiles
-    ports:
-      - 1337:80
+      - html:/usr/share/nginx/html
+      - dhparam:/etc/nginx/dhparam
+      - vhost:/etc/nginx/vhost.d
+      - certs:/etc/nginx/certs:ro
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - backend
+  nginx-proxy-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    env_file:
+      - nginx/.env.prod.proxy-companion
+    volumes:
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    depends_on:
+      - nginx-proxy
+
 volumes:
-  postgres-data:
   static_volume:
   media_volume:
+  certs:
+  html:
+  vhost:
+  dhparam:
