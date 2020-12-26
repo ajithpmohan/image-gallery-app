@@ -15,6 +15,13 @@ services:
       # `frontend/.env.production.example` file to .env.production
       # and make appropriate changes.
       - ./frontend/.env.production
+    logging:
+      driver: "awslogs"
+      options:
+        # Configure Amazon CloudWatch & update awslogs-region if needed
+        awslogs-region: "us-east-2"
+        awslogs-group: "image-gallery"
+        awslogs-stream: "frontend"
   backend:
     build:
       context: ./backend
@@ -28,6 +35,13 @@ services:
       # `backend/.env.prod.example` file to .env.prod and make
       # appropriate changes.
       - ./backend/.env.prod
+    logging:
+      driver: "awslogs"
+      options:
+        # Configure Amazon CloudWatch & update awslogs-region if needed
+        awslogs-region: "us-east-2"
+        awslogs-group: "image-gallery"
+        awslogs-stream: "backend"
   nginx-proxy:
     build: nginx
     image: docker.pkg.github.com/ajithpmohan/image-gallery-app/nginx-proxy:latest
@@ -42,6 +56,13 @@ services:
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - backend
+    logging:
+      driver: "awslogs"
+      options:
+        # Configure Amazon CloudWatch & update awslogs-region if needed
+        awslogs-region: "us-east-2"
+        awslogs-group: "image-gallery"
+        awslogs-stream: "nginx-proxy"
   nginx-proxy-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     env_file:
@@ -53,6 +74,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - nginx-proxy
+    logging:
+      driver: "awslogs"
+      options:
+        # Configure Amazon CloudWatch & update awslogs-region if needed
+        awslogs-region: "us-east-2"
+        awslogs-group: "image-gallery"
+        awslogs-stream: "nginx-proxy-letsencrypt"
 
 volumes:
   certs:
