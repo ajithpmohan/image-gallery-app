@@ -1,4 +1,3 @@
-export const HOME = '/';
-export const UPLOAD = '/upload';
-export const GALLERY = '/gallery';
+export const GALLERY = '/';
 export const CATEGORY = '/category';
+export const UPLOAD = '/upload';

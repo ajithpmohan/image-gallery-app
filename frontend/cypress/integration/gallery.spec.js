@@ -1,6 +1,6 @@
 describe('Gallery', () => {
   it('filter by category', () => {
-    cy.visit('/gallery');
+    cy.visit('/');
 
     // check that `ML category created on category.spec.js exists
     cy.get('select.form-control').contains('ML');

@@ -1,9 +1,0 @@
-location /static/ {
-  alias /usr/src/app/assets/staticfiles/;
-  add_header Access-Control-Allow-Origin *;
-}
-
-location /media/ {
-  alias /usr/src/app/assets/mediafiles/;
-  add_header Access-Control-Allow-Origin *;
-}

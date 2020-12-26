@@ -38,12 +38,6 @@ ENV APP_DIR=$BASE_DIR/backend
 RUN mkdir -p $APP_DIR
 WORKDIR $APP_DIR
 
-# Set assets directory
-ENV ASSETS_DIR=$BASE_DIR/assets
-RUN mkdir -p $ASSETS_DIR
-RUN mkdir $ASSETS_DIR/staticfiles
-RUN mkdir $ASSETS_DIR/mediafiles
-
 # upgrade pip
 RUN pip install --no-cache-dir --upgrade pip
 

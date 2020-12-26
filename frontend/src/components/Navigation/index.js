@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const Navigation = () => (
   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    <Navbar.Brand as={Link} to={ROUTES.HOME}>
+    <Navbar.Brand as={Link} to={ROUTES.GALLERY}>
       Image Gallery
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -16,9 +16,6 @@ const Navigation = () => (
         </Nav.Link>
         <Nav.Link as={Link} to={ROUTES.UPLOAD}>
           Upload
-        </Nav.Link>
-        <Nav.Link as={Link} to={ROUTES.GALLERY}>
-          Gallery
         </Nav.Link>
       </Nav>
     </Navbar.Collapse>

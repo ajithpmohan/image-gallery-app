@@ -5,7 +5,6 @@
     "serverUrl": "http://localhost:9002/api/v1"
   },
   "testFiles": [
-    "home.spec.js",
     "category.spec.js",
     "upload.spec.js",
     "gallery.spec.js"

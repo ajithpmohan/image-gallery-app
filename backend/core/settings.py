@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'debug_toolbar',
     'django_extensions',
+    'storages',
     'restapi',
 ]
 
@@ -124,29 +125,40 @@ USE_L10N = True
 
 USE_TZ = True
 
-CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', False)
-
-SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', False)
-
-SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', False)
-
-USE_X_FORWARDED_HOST = config('USE_X_FORWARDED_HOST', False)
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-ASSETS_DIR = Path(BASE_DIR).parent / 'assets'
+USE_S3 = config('USE_S3', False)
 
-STATIC_URL = '/static/'
+if USE_S3:
+    # aws settings
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+    AWS_DEFAULT_ACL = None
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
 
-STATIC_ROOT = Path(ASSETS_DIR) / 'staticfiles'
+    # s3 static settings
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'core.storage_backends.StaticStorage'
 
-MEDIA_URL = '/media/'
+    # s3 media settings
+    MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStorage'
+else:
+    ASSETS_DIR = Path(BASE_DIR).parent / 'assets'
 
-MEDIA_ROOT = Path(ASSETS_DIR) / 'mediafiles'
+    # default static settings
+    STATIC_URL = '/static/'
+    STATIC_ROOT = Path(ASSETS_DIR) / 'staticfiles'
+
+    # default media settings
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = Path(ASSETS_DIR) / 'mediafiles'
+
 
 CORS_ORIGIN_WHITELIST = config('CORS_ORIGIN_WHITELIST', cast=Csv())
 
@@ -205,3 +217,13 @@ LOGGING = {
         },
     },
 }
+
+CSRF_COOKIE_SECURE = config('CSRF_COOKIE_SECURE', False)
+
+SESSION_COOKIE_SECURE = config('SESSION_COOKIE_SECURE', False)
+
+SECURE_SSL_REDIRECT = config('SECURE_SSL_REDIRECT', False)
+
+USE_X_FORWARDED_HOST = config('USE_X_FORWARDED_HOST', False)
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

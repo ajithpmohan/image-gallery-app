@@ -21,9 +21,6 @@ services:
       dockerfile: Dockerfile.prod
     image: docker.pkg.github.com/ajithpmohan/image-gallery-app/backend-prod:1.0
     command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
-    volumes:
-      - static_volume:/usr/src/app/assets/staticfiles
-      - media_volume:/usr/src/app/assets/mediafiles
     expose:
       - 8000
     env_file:
@@ -39,12 +36,9 @@ services:
       - 443:443
       - 80:80
     volumes:
-      - static_volume:/usr/src/app/assets/staticfiles
-      - media_volume:/usr/src/app/assets/mediafiles
-      - html:/usr/share/nginx/html
-      - dhparam:/etc/nginx/dhparam
-      - vhost:/etc/nginx/vhost.d
       - certs:/etc/nginx/certs:ro
+      - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/tmp/docker.sock:ro
     depends_on:
       - backend
@@ -54,16 +48,13 @@ services:
       - nginx/.env.prod.proxy-companion
     volumes:
       - certs:/etc/nginx/certs:rw
-      - vhost:/etc/nginx/vhost.d
       - html:/usr/share/nginx/html
+      - vhost:/etc/nginx/vhost.d
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:
       - nginx-proxy
 
 volumes:
-  static_volume:
-  media_volume:
   certs:
   html:
   vhost:
-  dhparam:
